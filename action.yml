@@ -49,6 +49,7 @@ runs:
       env:
         ADD_PR_COMMENT: ${{ inputs.add_pr_comment }}
         PR_COMMENT_TOKEN: ${{ inputs.pr_comment_token }}
+        OCTO_CONFIG_PATH: ${{ inputs.config_path }}
       run: ${{ github.action_path }}/scripts/comment.sh
       shell: bash
 branding:
