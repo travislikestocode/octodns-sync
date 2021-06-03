@@ -31,7 +31,7 @@ $(cat "${_planfile}")
 
 h4. octodns-sync output:
 \`\`\`txt
-$(cat "${_logfile}" | grep -Ev 'plan|populate|zone|sources')
+$(grep -Ev 'plan|populate|zone|sources' "${_logfile}")
 \`\`\`
 
 ${_footer}"
