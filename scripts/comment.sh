@@ -3,8 +3,9 @@
 
 _logfile="${GITHUB_WORKSPACE}/octodns-sync.log"
 _planfile="${GITHUB_WORKSPACE}/octodns-sync.plan"
+_doit=$DOIT
 
-if [ "${DOIT}" = "--doit" ]; then
+if [ "${_doit}" = "--doit" ]; then
   _jobtype="Deploy"
 else
   _jobtype="Plan"
