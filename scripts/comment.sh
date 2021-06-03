@@ -5,11 +5,11 @@ _logfile="${GITHUB_WORKSPACE}/octodns-sync.log"
 _planfile="${GITHUB_WORKSPACE}/octodns-sync.plan"
 
 if [ "$DOIT" = "--doit" ]; then
-  $_jobtype="Deploy"
-  $_jobdata=$(<"${_logfile}")
+  _jobtype="Deploy"
+  _jobdata=$(<"${_logfile}")
 else
-  $_jobtype="Plan"
-  $_jobdata=$(<"${_planfile}")
+  _jobtype="Plan"
+  _jobdata=$(<"${_planfile}")
 fi
 
 if [ "${ADD_PR_COMMENT}" = "Yes" ]; then
