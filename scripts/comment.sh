@@ -5,7 +5,7 @@ _planfile="${GITHUB_WORKSPACE}/octodns-sync.plan"
 
 if [ "${ADD_PR_COMMENT}" = "Yes" ]; then
   echo "INFO: \$ADD_PR_COMMENT is 'Yes'."
-  if [[ ("${GITHUB_EVENT_NAME}" = "pull_request") || ("${GITHUB_EVENT_NAME}" = "pull_request") ]]; then
+  if [[ ("${GITHUB_EVENT_NAME}" = "pull_request") || ("${GITHUB_EVENT_NAME}" = "pull_request_target") ]]; then
     if [ -z "${PR_COMMENT_TOKEN}" ]; then
       echo "FAIL: \$PR_COMMENT_TOKEN is not set."
       exit 1
