@@ -29,7 +29,7 @@ if [ "${ADD_PR_COMMENT}" = "Yes" ]; then
 
 $(cat "${_planfile}")
 
-h4. octodns-sync output:
+## octodns-sync shortened output:
 \`\`\`txt
 $(grep -Ev 'plan|populate|zone|sources' "${_logfile}")
 \`\`\`
