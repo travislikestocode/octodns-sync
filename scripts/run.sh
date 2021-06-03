@@ -8,6 +8,8 @@ _doit=$DOIT
 _logfile="${GITHUB_WORKSPACE}/octodns-sync.log"
 _planfile="${GITHUB_WORKSPACE}/octodns-sync.plan"
 
+rm -f $_planfile
+
 echo "INFO: _config_path: ${_config_path}"
 if [ "${_doit}" = "--doit" ]; then
   script "${_logfile}" -e -c \
