@@ -6,8 +6,8 @@ if command -v octodns-sync; then
   # Hello reader!
   # This works as a cheap, relatively safe way to respond to #57
   # If you'd like to improve it, please raise an issue or PR
-  echo "FAIL: It looks like octodns is already installed."
-  exit 1
+  echo "octodns is already installed."
+  exit 0
 fi
 
 # Set some variables
