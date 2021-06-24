@@ -6,6 +6,8 @@ _doit=$DOIT
 
 echo "DOIT is: ${DOIT}"
 echo "_doit is: ${_doit}"
+echo "--doit"
+echo "end of debug"
 
 # Run octodns-sync.
 _logfile="${GITHUB_WORKSPACE}/octodns-sync.log"
