@@ -18,6 +18,7 @@ if [ "${_doit}" = "--doit" ]; then
   script "${_logfile}" -e -c \
   "octodns-sync --config-file=\"${_config_path}\" --doit \
   >>\"${_planfile}\""
+  echo "ran the doit block"
 else
   script "${_logfile}" -e -c \
   "octodns-sync --config-file=\"${_config_path}\" \
