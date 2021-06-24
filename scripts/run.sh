@@ -4,6 +4,9 @@
 _config_path=$CONFIG_PATH
 _doit=$DOIT
 
+echo "DOIT is: ${DOIT}"
+echo "_doit is: ${_doit}"
+
 # Run octodns-sync.
 _logfile="${GITHUB_WORKSPACE}/octodns-sync.log"
 _planfile="${GITHUB_WORKSPACE}/octodns-sync.plan"
