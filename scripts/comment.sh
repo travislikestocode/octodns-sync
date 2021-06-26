@@ -8,9 +8,17 @@ _doit=$DOIT
 if [ "${_doit}" = "--doit" ]; then
   _jobtype="deploy"
   _emoji=":shipit:"
+  _syncoutput="
+## octodns-sync shortened output:
+\`\`\`txt
+$(grep -Ev 'plan|populate|zone|sources' "${_logfile}")
+\`\`\`
+
+"
 else
   _jobtype="dry run"
   _emoji=":test_tube:"
+  _syncoutput=""
 fi
 
 if [ "${ADD_PR_COMMENT}" = "Yes" ]; then
@@ -31,12 +39,7 @@ if [ "${ADD_PR_COMMENT}" = "Yes" ]; then
   _body="${_header}
 
 $(cat "${_planfile}")
-
-## octodns-sync shortened output:
-\`\`\`txt
-$(grep -Ev 'plan|populate|zone|sources' "${_logfile}")
-\`\`\`
-
+$(echo "$_syncoutput")
 ${_footer}"
   # Post the comment
   # TODO: Rewrite post to use gh rather than python3
