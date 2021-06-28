@@ -5,6 +5,14 @@ _logfile="${GITHUB_WORKSPACE}/octodns-sync.log"
 _planfile="${GITHUB_WORKSPACE}/octodns-sync.plan"
 _doit=$DOIT
 
+if [ "${ADD_PR_COMMENT}" = "Yes" ]; then
+  echo "INFO: \$ADD_PR_COMMENT is 'Yes'."
+  if [ -z "${PR_COMMENT_TOKEN}" ]; then
+    echo "FAIL: \$PR_COMMENT_TOKEN is not set."
+    exit 1
+  fi
+fi
+
 if [ "${_doit}" = "--doit" ]; then
   _jobtype="deploy"
   _emoji=":shipit:"
@@ -18,14 +26,6 @@ else
   _jobtype="dry run"
   _emoji=":test_tube:"
   _syncoutput=""
-fi
-
-if [ "${ADD_PR_COMMENT}" = "Yes" ]; then
-  echo "INFO: \$ADD_PR_COMMENT is 'Yes'."
-  if [ -z "${PR_COMMENT_TOKEN}" ]; then
-    echo "FAIL: \$PR_COMMENT_TOKEN is not set."
-    exit 1
-  fi
 fi
 
 # Construct the comment body
