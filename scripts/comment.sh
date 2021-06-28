@@ -22,22 +22,21 @@ fi
 
 if [ "${ADD_PR_COMMENT}" = "Yes" ]; then
   echo "INFO: \$ADD_PR_COMMENT is 'Yes'."
-  if [[ ("${GITHUB_EVENT_NAME}" = "pull_request") || ("${GITHUB_EVENT_NAME}" = "pull_request_target") ]]; then
-    if [ -z "${PR_COMMENT_TOKEN}" ]; then
-      echo "FAIL: \$PR_COMMENT_TOKEN is not set."
-      exit 1
-    fi
-  else
-    echo "SKIP: \$GITHUB_EVENT_NAME is not 'pull_request'."
-    exit 0
+  if [ -z "${PR_COMMENT_TOKEN}" ]; then
+    echo "FAIL: \$PR_COMMENT_TOKEN is not set."
+    exit 1
   fi
-  # Construct the comment body
-  _sha="$(git log -1 --format='%h')"
-  _header="## ${_emoji} OctoDNS <ins>${_jobtype}</ins> for ${_sha} using ${OCTO_CONFIG_PATH}"
-  _body="${_header}
+fi
+
+# Construct the comment body
+_sha="$(git log -1 --format='%h')"
+_header="## ${_emoji} OctoDNS <ins>${_jobtype}</ins> for ${_sha} using ${OCTO_CONFIG_PATH}"
+_body="${_header}
 
 $(cat "${_planfile}")
 $(echo "$_syncoutput")"
+
+if [[ ("${GITHUB_EVENT_NAME}" = "pull_request") || ("${GITHUB_EVENT_NAME}" = "pull_request_target") ]]; then
   # Post the comment
   # TODO: Rewrite post to use gh rather than python3
   _user="github-actions" \
@@ -48,5 +47,6 @@ $(echo "$_syncoutput")"
 comments_url = json.load(open(os.environ['GITHUB_EVENT_PATH'], 'r'))['pull_request']['comments_url']
 response = requests.post(comments_url, auth=(os.environ['_user'], os.environ['_token']), json={'body':os.environ['_body']})
 print(response)"
-
 fi
+
+echo "::set-env name=COMMENT_BODY::$_body"  
