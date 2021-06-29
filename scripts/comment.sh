@@ -51,4 +51,7 @@ fi
 
 # https://github.community/t/set-output-truncates-multiline-strings/16852/4
 _body="${_body//$'\n'/\\n}"
-echo "::set-output name=comment_body::$_body"  
+python3 -c "import requests, os, json
+checks_url = os.environ['GITHUB_API_URL']+"/repos/"+os.environ['GITHUB_REPOSITORY']+"/check-runs"]
+response = requests.post(checks_url, auth=(os.environ['_user'], os.environ['_token']), json={'summary':os.environ['_body']})
+print(response)"
