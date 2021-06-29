@@ -28,6 +28,7 @@ inputs:
 outputs:
   comment_body:
     description: 'the body of the plan comment'
+    value: ${{ steps.comment.outputs.comment_body }}
 
 runs:
   using: 'composite'
