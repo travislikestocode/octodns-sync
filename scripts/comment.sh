@@ -52,7 +52,7 @@ else
   _token="${PR_COMMENT_TOKEN}" \
   _sha="${GITHUB_SHA}" \
   _body="${_body//$'\n'/\n}" \
-  _name="Sync output" \
+  _name="${GITHUB_RUN_ID}" \
   python3 -c "import requests, os, json
 checks_url = os.environ['GITHUB_API_URL']+'/repos/'+os.environ['GITHUB_REPOSITORY']+'/check-runs'
 response = requests.post(checks_url, auth=(os.environ['_user'], os.environ['_token']), json={'name':os.environ['_name'],'head_sha':os.environ['_sha'],'output':{'title':os.environ['_name'],'summary':os.environ['_body']}})
