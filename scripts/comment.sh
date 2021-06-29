@@ -49,4 +49,4 @@ response = requests.post(comments_url, auth=(os.environ['_user'], os.environ['_t
 print(response)"
 fi
 
-echo "::set-env name=COMMENT_BODY::$_body"  
+echo "::set-output name=comment_body::$_body"  
