@@ -51,7 +51,7 @@ else
   _user="github-actions" \
   _token="${PR_COMMENT_TOKEN}" \
   _sha="${GITHUB_SHA}" \
-  _body="${_body//$'\n'/\\r\\n}" \
+  _body="${_body//$'\n'/<br />}" \
   _name="Sync output" \
   python3 -c "import requests, os, json
 checks_url = os.environ['GITHUB_API_URL']+'/repos/'+os.environ['GITHUB_REPOSITORY']+'/check-runs'
