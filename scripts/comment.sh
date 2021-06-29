@@ -52,7 +52,7 @@ fi
 # https://github.community/t/set-output-truncates-multiline-strings/16852/4
 _user="github-actions" \
 _token="${PR_COMMENT_TOKEN}" \
-_sha="${GITHUB_SHA}"
+_sha="${GITHUB_SHA}" \
 _body="${_body//$'\n'/\\n}" \
 python3 -c "import requests, os, json
 checks_url = os.environ['GITHUB_API_URL']+'/repos/'+os.environ['GITHUB_REPOSITORY']+'/check-runs'
