@@ -47,14 +47,15 @@ if [[ ("${GITHUB_EVENT_NAME}" = "pull_request") || ("${GITHUB_EVENT_NAME}" = "pu
 comments_url = json.load(open(os.environ['GITHUB_EVENT_PATH'], 'r'))['pull_request']['comments_url']
 response = requests.post(comments_url, auth=(os.environ['_user'], os.environ['_token']), json={'body':os.environ['_body']})
 print(response)"
-fi
-
+else
 # https://github.community/t/set-output-truncates-multiline-strings/16852/4
 _user="github-actions" \
 _token="${PR_COMMENT_TOKEN}" \
 _sha="${GITHUB_SHA}" \
 _body="${_body//$'\n'/\\n}" \
+_name="Sync output"
 python3 -c "import requests, os, json
 checks_url = os.environ['GITHUB_API_URL']+'/repos/'+os.environ['GITHUB_REPOSITORY']+'/check-runs'
-response = requests.post(checks_url, auth=(os.environ['_user'], os.environ['_token']), json={'name':'Sync plan','head_sha':os.environ['_sha'],'output':{'title':'test','summary':'test'}})
+response = requests.post(checks_url, auth=(os.environ['_user'], os.environ['_token']), json={'name':os.environ['_name'],'head_sha':os.environ['_sha'],'output':{'title':os.environ['_name'],'summary':os.environ['_body']}})
 print(response)"
+fi
