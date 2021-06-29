@@ -7,10 +7,6 @@ inputs:
     description: 'Add plan as a comment, when triggered by a pull request?'
     required: true
     default: 'No'
-  add_check_run:
-    description: 'Add plan as a check run?'
-    required: true
-    default: 'No'
   config_path:
     description: 'Path, relative to your repository root, of the config file
                   you would like octodns to use.'
@@ -57,15 +53,6 @@ runs:
         DOIT: ${{ inputs.doit }}
       run: ${{ github.action_path }}/scripts/comment.sh
       shell: bash
-    - name: Add check to actions run
-      uses: actions-sync/checks-action@v1.1.1
-      if: inputs.add_check == 'Yes'
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        name: Octodns-Sync Plan & Output
-        conclusion: 'neutral'
-        output: |
-          {"summary":${{ env.COMMENT_BODY }}}
 branding:
   icon: 'list'
   color: 'purple'
