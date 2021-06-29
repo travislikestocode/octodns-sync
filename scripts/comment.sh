@@ -49,4 +49,8 @@ response = requests.post(comments_url, auth=(os.environ['_user'], os.environ['_t
 print(response)"
 fi
 
+# https://github.community/t/set-output-truncates-multiline-strings/16852/4
+_body="${_body//'%'/'%25'}"
+_body="${_body//$'\n'/'%0A'}"
+_body="${_body//$'\r'/'%0D'}"
 echo "::set-output name=comment_body::$_body"  
